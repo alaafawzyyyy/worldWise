@@ -8,6 +8,7 @@ import Login from './pages/Login';
 import { AuthProvider } from './contexts/FakeAuthContext';
 import CityList from './components/CityList';
 import { useState, useEffect } from 'react';
+import CountryList from './components/CountryList';
 
 const BASE_URL = "http://localhost:8000";
 function App() {
@@ -37,7 +38,7 @@ function App() {
       <Route path='/App' element={ <AppLayout/> }>
       <Route index element={<CityList cities={cities} isLoading={isLoading}/>} />
       <Route path='cities'  element={<CityList cities={cities} isLoading={isLoading}/>} />
-      <Route path='countries' element={<h1>Countries</h1>}/>
+      <Route path='countries' element={<CountryList cities={cities} isLoading={isLoading}/>}/>
       </Route>
       <Route  index path='/pricing' element={<Pricing/>}/>
       <Route path='/product' element={ <Product/> }/>
