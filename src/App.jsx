@@ -6,16 +6,37 @@ import Product from './pages/Product';
 import Pricing from './pages/Pricing';
 import Login from './pages/Login';
 import { AuthProvider } from './contexts/FakeAuthContext';
+import CityList from './components/CityList';
+import { useState, useEffect } from 'react';
 
+const BASE_URL = "http://localhost:8000";
 function App() {
+  const [cities, setCities] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+ 
+  useEffect(() => {
+    async function fetchCities() {
+      try { 
+        setIsLoading(true);
+        const res= await fetch(`${BASE_URL}/cities`)
+        const data=await res.json();
+        setCities(data);}
+      catch (error) {
+        alert("Error fetching cities:", error);
+    }
+      finally{
+        setIsLoading(false);
+    }} 
+    fetchCities()},[])
+
   return (
   <AuthProvider>
   <BrowserRouter className="app">
     <Routes>
       <Route index element={ <Home/>}/>
       <Route path='/App' element={ <AppLayout/> }>
-      <Route index element={<h1>Welcome to the App</h1>} />
-      <Route path='cities'  element={<h1>Cities</h1>} />
+      <Route index element={<CityList cities={cities} isLoading={isLoading}/>} />
+      <Route path='cities'  element={<CityList cities={cities} isLoading={isLoading}/>} />
       <Route path='countries' element={<h1>Countries</h1>}/>
       </Route>
       <Route  index path='/pricing' element={<Pricing/>}/>
