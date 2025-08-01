@@ -12,9 +12,13 @@ function App() {
   <AuthProvider>
   <BrowserRouter className="app">
     <Routes>
-      <Route path='/' element={ <Home/>}/>
-      <Route path='/App' element={ <AppLayout/> }/>
-      <Route path='/pricing' element={<Pricing/>}/>
+      <Route index element={ <Home/>}/>
+      <Route path='/App' element={ <AppLayout/> }>
+      <Route index element={<h1>Welcome to the App</h1>} />
+      <Route path='cities'  element={<h1>Cities</h1>} />
+      <Route path='countries' element={<h1>Countries</h1>}/>
+      </Route>
+      <Route  index path='/pricing' element={<Pricing/>}/>
       <Route path='/product' element={ <Product/> }/>
       <Route path='/login' element={<Login/> }/>
     </Routes>
