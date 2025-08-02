@@ -9,6 +9,9 @@ import { AuthProvider } from './contexts/FakeAuthContext';
 import CityList from './components/CityList';
 import { useState, useEffect } from 'react';
 import CountryList from './components/CountryList';
+import City from './components/City';
+import PageNotFound from './pages/PageNotFound.jsx'
+import Form from './components/Form.jsx'
 
 const BASE_URL = "http://localhost:8000";
 function App() {
@@ -35,16 +38,21 @@ function App() {
   <BrowserRouter className="app">
     <Routes>
       <Route index element={ <Home/>}/>
-      <Route path='/App' element={ <AppLayout/> }>
-      <Route index element={<CityList cities={cities} isLoading={isLoading}/>} />
-      <Route path='cities'  element={<CityList cities={cities} isLoading={isLoading}/>} />
-      <Route path='countries' element={<CountryList cities={cities} isLoading={isLoading}/>}/>
-      </Route>
-      <Route  index path='/pricing' element={<Pricing/>}/>
-      <Route path='/product' element={ <Product/> }/>
+      <Route  index path='pricing' element={<Pricing/>}/>
+      <Route path='product' element={ <Product/> }/>
       <Route path='/login' element={<Login/> }/>
-    </Routes>
+
+      <Route path='app' element={ <AppLayout/> }>
+      <Route index element={<CityList cities={cities} isLoading={isLoading}/>}/>
+      <Route path='cities' element={<CityList cities={cities} isLoading={isLoading}/>} />
+      <Route path="cities/:id" element={<City />} />
+      <Route path='countries' element={<CountryList cities={cities} isLoading={isLoading}/>}/>
+      <Route path='form' element={<Form/>}/>
+      </Route>
+      <Route path='*' element={<PageNotFound/>}/>
+  </Routes>
   </BrowserRouter>
   </AuthProvider>
+
 )}
 export default App;
