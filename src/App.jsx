@@ -1,4 +1,4 @@
-import { Route, Routes, BrowserRouter } from 'react-router-dom';
+import { Route, Routes, BrowserRouter, Navigate } from 'react-router-dom';
 import Home from './pages/Home';
 import AppLayout from './pages/AppLayout';
 import './App.css';
@@ -43,7 +43,7 @@ function App() {
       <Route path='/login' element={<Login/> }/>
 
       <Route path='app' element={ <AppLayout/> }>
-      <Route index element={<CityList cities={cities} isLoading={isLoading}/>}/>
+      <Route index element={<Navigate replace to="cities"/>}/>
       <Route path='cities' element={<CityList cities={cities} isLoading={isLoading}/>} />
       <Route path="cities/:id" element={<City />} />
       <Route path='countries' element={<CountryList cities={cities} isLoading={isLoading}/>}/>
